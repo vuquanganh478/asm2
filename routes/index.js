@@ -130,4 +130,13 @@ router.get('/shoppinglego', async(req, res) => {
   var toy1 = await Toy1Model.find({});
   res.render('shoppinglego', { toy1: toy1 });
 })
+
+router.post('/order', async (req, res) => {
+  var id = req.body.id;
+  var toy1 = await Toy1Model.findById(id);
+  var order_quantity = req.body.order_quantity;
+  var price = req.body.price;
+  var total_price = price * order_quantity;
+  res.render('order_confirm', { toy1: toy1, order_quantity : order_quantity, total_price : total_price});
+})
 module.exports = router;
